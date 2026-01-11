@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* Ensure a hand cursor for interactive/clickable elements across the site */
+/* Covers common interactive elements and elements with click handlers */
+a,
+button,
+summary,
+[role="button"],
+[onclick],
+input[type="button"],
+input[type="submit"],
+label[for],
+.cursor-pointer,
+.clickable {
+	cursor: pointer;
+}
+
+/* Fallback for elements that may be clickable via JS (e.g., divs with handlers) */
+*[data-clickable] {
+	cursor: pointer;
+}

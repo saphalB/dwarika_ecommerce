@@ -107,7 +107,7 @@ function App() {
   const [shippingCharge, setShippingCharge] = useState(null); // loaded from server
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const apiOrigin = (
-    import.meta.env.VITE_API_URL || "http://localhost:5000"
+    import.meta.env.VITE_API_URL || "https://dwarika-ecommerce.onrender.com"
   ).replace(/\/api$/, "");
   const resolveAvatarSrc = (avatar) => {
     if (!avatar) return null;

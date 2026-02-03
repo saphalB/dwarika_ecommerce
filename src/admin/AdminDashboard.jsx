@@ -1933,7 +1933,7 @@ import {
   Settings,
 } from "lucide-react";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://dwarika-ecommerce.onrender.com/api";
 
 function AdminDashboard() {
   const [activeTab, setActiveTab] = useState(() => {

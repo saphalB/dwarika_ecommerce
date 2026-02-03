@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://dwarika-ecommerce.onrender.com/api';
 
 // Simple in-memory cache for a few short-lived endpoints to avoid repeated fetches during rapid re-renders
 const _cache = {

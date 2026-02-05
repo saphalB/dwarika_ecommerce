@@ -95,9 +95,7 @@ function App() {
       if (raw) return JSON.parse(raw);
     } catch (e) {}
     return [];
-  });
-
-  // Cart items: [{product, quantity}, ...]
+  }); // Cart items: [{product, quantity}, ...]
   const [selectedProduct, setSelectedProduct] = useState(null); // For product detail view
   const [showProductDetail, setShowProductDetail] = useState(false); // Toggle product detail modal
   const [products, setProducts] = useState([]);
@@ -107,7 +105,7 @@ function App() {
   const [shippingCharge, setShippingCharge] = useState(null); // loaded from server
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const apiOrigin = (
-    import.meta.env.VITE_API_URL || "https://dwarika-ecommerce.onrender.com"
+    import.meta.env.VITE_API_URL || "http://localhost:5000"
   ).replace(/\/api$/, "");
   const resolveAvatarSrc = (avatar) => {
     if (!avatar) return null;
@@ -295,7 +293,7 @@ function App() {
         setUser(
           res.user
             ? { ...res.user, avatar: resolveAvatarSrc(res.user.avatar || null) }
-            : null
+            : null,
         );
         setCurrentPage("home");
         if (postLoginRedirect) {
@@ -330,9 +328,7 @@ function App() {
             <form onSubmit={submit} className="space-y-4">
               <div>
                 <label
-                  className={`block mb-1 ${
-                    darkMode ? "text-amber-200" : "text-gray-700"
-                  }`}
+                  className={`block mb-1 ${darkMode ? "text-amber-200" : "text-gray-700"}`}
                 >
                   Email
                 </label>
@@ -346,9 +342,7 @@ function App() {
               </div>
               <div>
                 <label
-                  className={`block mb-1 ${
-                    darkMode ? "text-amber-200" : "text-gray-700"
-                  }`}
+                  className={`block mb-1 ${darkMode ? "text-amber-200" : "text-gray-700"}`}
                 >
                   Password
                 </label>
@@ -430,7 +424,7 @@ function App() {
                     ...res.user,
                     avatar: resolveAvatarSrc(res.user.avatar || null),
                   }
-                : null
+                : null,
             );
           }
           setVerifyStatus("success");
@@ -450,9 +444,7 @@ function App() {
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode ? "bg-amber-900" : "bg-stone-100"
-        } py-20`}
+        className={`min-h-screen ${darkMode ? "bg-amber-900" : "bg-stone-100"} py-20`}
       >
         <div className="max-w-md mx-auto p-6 bg-white rounded shadow">
           {verifyStatus === "loading" && <p>Verifying your email…</p>}
@@ -513,9 +505,7 @@ function App() {
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode ? "bg-gray-900" : "bg-stone-100"
-        } py-20`}
+        className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-stone-100"} py-20`}
       >
         <div className="max-w-md mx-auto rounded-2xl overflow-hidden shadow-2xl">
           <div className="p-6 bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-700 text-white">
@@ -547,9 +537,7 @@ function App() {
               <form onSubmit={submit} className="space-y-4">
                 <div>
                   <label
-                    className={`block mb-1 ${
-                      darkMode ? "text-gray-300" : "text-gray-700"
-                    }`}
+                    className={`block mb-1 ${darkMode ? "text-gray-300" : "text-gray-700"}`}
                   >
                     Email
                   </label>
@@ -608,9 +596,7 @@ function App() {
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode ? "bg-gray-900" : "bg-stone-100"
-        } py-20`}
+        className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-stone-100"} py-20`}
       >
         <div className="max-w-md mx-auto p-6 bg-white rounded shadow">
           <h2 className="text-2xl font-bold">Set your password</h2>
@@ -672,9 +658,7 @@ function App() {
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode ? "bg-gray-900" : "bg-stone-100"
-        } py-20`}
+        className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-stone-100"} py-20`}
       >
         <div className="max-w-md mx-auto rounded-2xl overflow-hidden shadow-2xl">
           <div className="p-6 bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-700 text-white">
@@ -687,9 +671,7 @@ function App() {
             <form onSubmit={submit} className="space-y-4">
               <div>
                 <label
-                  className={`block mb-1 ${
-                    darkMode ? "text-gray-300" : "text-gray-700"
-                  }`}
+                  className={`block mb-1 ${darkMode ? "text-gray-300" : "text-gray-700"}`}
                 >
                   Full name
                 </label>
@@ -703,9 +685,7 @@ function App() {
               </div>
               <div>
                 <label
-                  className={`block mb-1 ${
-                    darkMode ? "text-gray-300" : "text-gray-700"
-                  }`}
+                  className={`block mb-1 ${darkMode ? "text-gray-300" : "text-gray-700"}`}
                 >
                   Email
                 </label>
@@ -719,9 +699,7 @@ function App() {
               </div>
               <div>
                 <label
-                  className={`block mb-1 ${
-                    darkMode ? "text-gray-300" : "text-gray-700"
-                  }`}
+                  className={`block mb-1 ${darkMode ? "text-gray-300" : "text-gray-700"}`}
                 >
                   Phone
                 </label>
@@ -762,7 +740,7 @@ function App() {
       // Show a full-screen message after registration instead of a popup
       setRegisterMessage(
         res.message ||
-          "Registered. Please check your email for the link to set your password."
+          "Registered. Please check your email for the link to set your password.",
       );
       setCurrentPage("registerSuccess");
     } catch (err) {
@@ -773,7 +751,7 @@ function App() {
         msg.toLowerCase().includes("already exists")
       ) {
         setRegisterMessage(
-          "Account created. Please check your email for verification and to set your password."
+          "Account created. Please check your email for verification and to set your password.",
         );
       } else {
         setRegisterMessage(msg);
@@ -823,7 +801,7 @@ function App() {
 
   const getFilteredProducts = () => {
     return products.filter((product) =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   };
 
@@ -834,13 +812,13 @@ function App() {
     setCart((prevCart) => {
       const productId = getProductId(product);
       const existingItem = prevCart.find(
-        (item) => getProductId(item.product) === productId
+        (item) => getProductId(item.product) === productId,
       );
       if (existingItem) {
         return prevCart.map((item) =>
           getProductId(item.product) === productId
             ? { ...item, quantity: item.quantity + quantity }
-            : item
+            : item,
         );
       }
       return [...prevCart, { product, quantity }];
@@ -849,7 +827,7 @@ function App() {
 
   const removeFromCart = (productId) => {
     setCart((prevCart) =>
-      prevCart.filter((item) => getProductId(item.product) !== productId)
+      prevCart.filter((item) => getProductId(item.product) !== productId),
     );
   };
 
@@ -860,15 +838,15 @@ function App() {
     }
     setCart((prevCart) =>
       prevCart.map((item) =>
-        getProductId(item.product) === productId ? { ...item, quantity } : item
-      )
+        getProductId(item.product) === productId ? { ...item, quantity } : item,
+      ),
     );
   };
 
   const getCartTotal = () => {
     return cart.reduce(
       (total, item) => total + item.product.price * item.quantity,
-      0
+      0,
     );
   };
 
@@ -930,8 +908,8 @@ function App() {
                   currentPage === "home"
                     ? "text-amber-600"
                     : darkMode
-                    ? "text-gray-300"
-                    : "text-gray-700"
+                      ? "text-gray-300"
+                      : "text-gray-700"
                 } hover:text-amber-600 font-medium`}
               >
                 Home
@@ -944,8 +922,8 @@ function App() {
                   currentPage === "products"
                     ? "text-amber-600"
                     : darkMode
-                    ? "text-gray-300"
-                    : "text-gray-700"
+                      ? "text-gray-300"
+                      : "text-gray-700"
                 } hover:text-amber-600 font-medium`}
               >
                 Products
@@ -957,8 +935,8 @@ function App() {
                   currentPage === "about"
                     ? "text-amber-600"
                     : darkMode
-                    ? "text-gray-300"
-                    : "text-gray-700"
+                      ? "text-gray-300"
+                      : "text-gray-700"
                 } hover:text-amber-600 font-medium`}
               >
                 About
@@ -970,8 +948,8 @@ function App() {
                   currentPage === "contact"
                     ? "text-amber-600"
                     : darkMode
-                    ? "text-gray-300"
-                    : "text-gray-700"
+                      ? "text-gray-300"
+                      : "text-gray-700"
                 } hover:text-amber-600 font-medium`}
               >
                 Contact
@@ -1005,8 +983,8 @@ function App() {
                     localTempQuery.trim()
                       ? "bg-amber-600 text-white hover:bg-amber-700 shadow-md hover:shadow-lg"
                       : darkMode
-                      ? "bg-gray-700 text-gray-400 hover:bg-gray-600"
-                      : "bg-stone-300 text-stone-600 hover:bg-stone-400"
+                        ? "bg-gray-700 text-gray-400 hover:bg-gray-600"
+                        : "bg-stone-300 text-stone-600 hover:bg-stone-400"
                   }`}
                   aria-label="Search"
                 >
@@ -1021,9 +999,7 @@ function App() {
                 className="relative p-2 rounded-full hover:bg-amber-100 dark:hover:bg-gray-700 transition-colors"
               >
                 <ShoppingCart
-                  className={`w-6 h-6 ${
-                    darkMode ? "text-white" : "text-gray-700"
-                  }`}
+                  className={`w-6 h-6 ${darkMode ? "text-white" : "text-gray-700"}`}
                 />
                 {cart.length > 0 && (
                   <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
@@ -1043,9 +1019,7 @@ function App() {
                     className="flex items-center gap-2 px-3 py-2 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-700"
                   >
                     <span
-                      className={`font-medium ${
-                        darkMode ? "text-white" : "text-amber-700"
-                      }`}
+                      className={`font-medium ${darkMode ? "text-white" : "text-amber-700"}`}
                     >
                       {user.name ? user.name.split(" ")[0] : "User"}
                     </span>
@@ -1138,8 +1112,8 @@ function App() {
                     currentPage === "home"
                       ? "text-amber-600"
                       : darkMode
-                      ? "text-gray-300"
-                      : "text-gray-700"
+                        ? "text-gray-300"
+                        : "text-gray-700"
                   } hover:text-amber-600`}
                 >
                   Home
@@ -1154,8 +1128,8 @@ function App() {
                     currentPage === "products"
                       ? "text-amber-600"
                       : darkMode
-                      ? "text-gray-300"
-                      : "text-gray-700"
+                        ? "text-gray-300"
+                        : "text-gray-700"
                   } hover:text-amber-600`}
                 >
                   Products
@@ -1170,8 +1144,8 @@ function App() {
                     currentPage === "about"
                       ? "text-amber-600"
                       : darkMode
-                      ? "text-gray-300"
-                      : "text-gray-700"
+                        ? "text-gray-300"
+                        : "text-gray-700"
                   } hover:text-amber-600`}
                 >
                   About
@@ -1186,8 +1160,8 @@ function App() {
                     currentPage === "contact"
                       ? "text-amber-600"
                       : darkMode
-                      ? "text-gray-300"
-                      : "text-gray-700"
+                        ? "text-gray-300"
+                        : "text-gray-700"
                   } hover:text-amber-600`}
                 >
                   Contact
@@ -1321,7 +1295,7 @@ function App() {
             console.debug &&
               console.debug(
                 "Shipping refreshed on focus",
-                d.shippingCharge || d
+                d.shippingCharge || d,
               );
           }
         } catch (err) {
@@ -1457,48 +1431,36 @@ function App() {
               <div className="grid grid-cols-3 gap-6 pt-8">
                 <div>
                   <div
-                    className={`text-3xl font-bold ${
-                      darkMode ? "text-white" : "text-gray-900"
-                    }`}
+                    className={`text-3xl font-bold ${darkMode ? "text-white" : "text-gray-900"}`}
                   >
                     35+
                   </div>
                   <div
-                    className={`text-sm ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
+                    className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}
                   >
                     Years Experience
                   </div>
                 </div>
                 <div>
                   <div
-                    className={`text-3xl font-bold ${
-                      darkMode ? "text-white" : "text-gray-900"
-                    }`}
+                    className={`text-3xl font-bold ${darkMode ? "text-white" : "text-gray-900"}`}
                   >
                     10K+
                   </div>
                   <div
-                    className={`text-sm ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
+                    className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}
                   >
                     Happy Customers
                   </div>
                 </div>
                 <div>
                   <div
-                    className={`text-3xl font-bold ${
-                      darkMode ? "text-white" : "text-gray-900"
-                    }`}
+                    className={`text-3xl font-bold ${darkMode ? "text-white" : "text-gray-900"}`}
                   >
                     5★
                   </div>
                   <div
-                    className={`text-sm ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
+                    className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}
                   >
                     Average Rating
                   </div>
@@ -1532,8 +1494,8 @@ function App() {
                       index === currentImageIndex
                         ? "w-8 bg-amber-600"
                         : darkMode
-                        ? "w-2 bg-gray-600"
-                        : "w-2 bg-gray-300"
+                          ? "w-2 bg-gray-600"
+                          : "w-2 bg-gray-300"
                     }`}
                   />
                 ))}
@@ -1593,11 +1555,7 @@ function App() {
 
     return (
       <div
-        className={`py-20 ${
-          darkMode
-            ? "bg-gray-900"
-            : "bg-gradient-to-b from-stone-100 to-stone-50"
-        }`}
+        className={`py-20 ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 to-stone-50"}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -1667,11 +1625,7 @@ function App() {
 
     return (
       <div
-        className={`py-20 ${
-          darkMode
-            ? "bg-amber-800"
-            : "bg-gradient-to-b from-stone-100 via-stone-50 to-amber-50"
-        }`}
+        className={`py-20 ${darkMode ? "bg-amber-800" : "bg-gradient-to-b from-stone-100 via-stone-50 to-amber-50"}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -2171,11 +2125,7 @@ function App() {
           </div>
         </div>
         <div
-          className={`border-t ${
-            darkMode ? "border-gray-700" : "border-white/30"
-          } mt-8 pt-8 text-center ${
-            darkMode ? "text-gray-400" : "text-white/90"
-          }`}
+          className={`border-t ${darkMode ? "border-gray-700" : "border-white/30"} mt-8 pt-8 text-center ${darkMode ? "text-gray-400" : "text-white/90"}`}
         >
           <p>&copy; 2025 Dwarika Gold Shop. All rights reserved.</p>
         </div>
@@ -2185,11 +2135,7 @@ function App() {
 
   const AboutPage = () => (
     <div
-      className={`min-h-screen ${
-        darkMode
-          ? "bg-gray-900"
-          : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"
-      }`}
+      className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h1
@@ -2250,11 +2196,7 @@ function App() {
 
   const ContactPage = () => (
     <div
-      className={`min-h-screen ${
-        darkMode
-          ? "bg-gray-900"
-          : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"
-      }`}
+      className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h1
@@ -2459,9 +2401,7 @@ function App() {
                     />
                   ))}
                   <span
-                    className={`ml-2 ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
+                    className={`ml-2 ${darkMode ? "text-gray-400" : "text-gray-600"}`}
                   >
                     ({selectedProduct.rating}.0)
                   </span>
@@ -2553,11 +2493,7 @@ function App() {
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode
-            ? "bg-gray-900"
-            : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"
-        }`}
+        className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <h1
@@ -2656,11 +2592,7 @@ function App() {
     if (cart.length === 0) {
       return (
         <div
-          className={`min-h-screen ${
-            darkMode
-              ? "bg-gray-900"
-              : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"
-          }`}
+          className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="text-center">
@@ -2693,11 +2625,7 @@ function App() {
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode
-            ? "bg-gray-900"
-            : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"
-        }`}
+        className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <h1
@@ -2754,7 +2682,7 @@ function App() {
                             onClick={() =>
                               updateCartQuantity(
                                 getProductId(item.product),
-                                item.quantity - 1
+                                item.quantity - 1,
                               )
                             }
                             className={`p-1 rounded-full ${
@@ -2776,7 +2704,7 @@ function App() {
                             onClick={() =>
                               updateCartQuantity(
                                 getProductId(item.product),
-                                item.quantity + 1
+                                item.quantity + 1,
                               )
                             }
                             className={`p-1 rounded-full ${
@@ -2921,11 +2849,7 @@ function App() {
     if (cart.length === 0) {
       return (
         <div
-          className={`min-h-screen ${
-            darkMode
-              ? "bg-gray-900"
-              : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"
-          }`}
+          className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="text-center">
@@ -2950,11 +2874,7 @@ function App() {
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode
-            ? "bg-gray-900"
-            : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"
-        }`}
+        className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <h1
@@ -3245,10 +3165,10 @@ function App() {
                         {paymentMethod === "cash"
                           ? "Cash on Delivery"
                           : paymentMethod === "card"
-                          ? "Card (Credit/Debit)"
-                          : paymentMethod === "khalti"
-                          ? "Khalti (Mobile Wallet)"
-                          : paymentMethod}
+                            ? "Card (Credit/Debit)"
+                            : paymentMethod === "khalti"
+                              ? "Khalti (Mobile Wallet)"
+                              : paymentMethod}
                       </div>
                     </div>
                   </div>
@@ -3299,7 +3219,7 @@ function App() {
               id === "cash_on_delivery" ? "cash" : id === "card" ? "card" : id;
             if (opts.length > 0) {
               const hasCurrent = opts.some(
-                (m) => mapToLocal(m.id) === paymentMethod
+                (m) => mapToLocal(m.id) === paymentMethod,
               );
               if (!hasCurrent) setPaymentMethod(mapToLocal(opts[0].id));
             }
@@ -3348,10 +3268,10 @@ function App() {
             paymentMethod === "cash"
               ? "cash_on_delivery"
               : paymentMethod === "card"
-              ? "card"
-              : paymentMethod === "khalti"
-              ? "khalti"
-              : paymentMethod,
+                ? "card"
+                : paymentMethod === "khalti"
+                  ? "khalti"
+                  : paymentMethod,
           paymentStatus: "pending",
           orderStatus: "pending",
           subtotal: getCartTotal(),
@@ -3367,7 +3287,7 @@ function App() {
           const orderRes = await createOrder(orderData);
           // amount in paisa (Khalti expects smallest currency unit)
           const amountPaisa = Math.round(
-            (orderRes.total || orderData.total) * 100
+            (orderRes.total || orderData.total) * 100,
           );
 
           // Load Khalti script if needed
@@ -3384,7 +3304,7 @@ function App() {
           const publicKey = import.meta.env.VITE_KHALTI_PUBLIC_KEY || "";
           if (!publicKey) {
             alert(
-              "Khalti public key not configured. Set VITE_KHALTI_PUBLIC_KEY in your frontend env."
+              "Khalti public key not configured. Set VITE_KHALTI_PUBLIC_KEY in your frontend env.",
             );
             return;
           }
@@ -3416,7 +3336,7 @@ function App() {
                     const err = await verifyRes.json().catch(() => ({}));
                     alert(
                       "Payment verification failed: " +
-                        (err.message || "Unknown")
+                        (err.message || "Unknown"),
                     );
                   }
                 } catch (err) {
@@ -3454,11 +3374,7 @@ function App() {
     if (cart.length === 0) {
       return (
         <div
-          className={`min-h-screen ${
-            darkMode
-              ? "bg-gray-900"
-              : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"
-          }`}
+          className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="text-center">
@@ -3483,11 +3399,7 @@ function App() {
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode
-            ? "bg-gray-900"
-            : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"
-        }`}
+        className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"}`}
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="flex items-center justify-center mb-8">
@@ -3536,28 +3448,20 @@ function App() {
                           m.id === "cash_on_delivery"
                             ? "cash"
                             : m.id === "card"
-                            ? "card"
-                            : m.id;
+                              ? "card"
+                              : m.id;
                         // render cash specifically to match existing UI
                         if (m.id === "cash_on_delivery") {
                           return (
                             <div
                               key={m.id}
                               onClick={() => setPaymentMethod(local)}
-                              className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                                paymentMethod === local
-                                  ? "border-amber-600 bg-amber-50"
-                                  : "border-amber-200 hover:border-amber-300"
-                              }`}
+                              className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === local ? "border-amber-600 bg-amber-50" : "border-amber-200 hover:border-amber-300"}`}
                             >
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-4">
                                   <div
-                                    className={`p-3 rounded-full ${
-                                      paymentMethod === local
-                                        ? "bg-amber-600 text-white"
-                                        : "bg-gray-200 text-gray-600"
-                                    }`}
+                                    className={`p-3 rounded-full ${paymentMethod === local ? "bg-amber-600 text-white" : "bg-gray-200 text-gray-600"}`}
                                   >
                                     <Wallet className="w-6 h-6" />
                                   </div>
@@ -3571,11 +3475,7 @@ function App() {
                                   </div>
                                 </div>
                                 <div
-                                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                    paymentMethod === local
-                                      ? "border-amber-600 bg-amber-600"
-                                      : "border-gray-300"
-                                  }`}
+                                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${paymentMethod === local ? "border-amber-600 bg-amber-600" : "border-gray-300"}`}
                                 >
                                   {paymentMethod === local && (
                                     <div className="w-2 h-2 rounded-full bg-white" />
@@ -3591,11 +3491,7 @@ function App() {
                           <div
                             key={m.id}
                             onClick={() => setPaymentMethod(local)}
-                            className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                              paymentMethod === local
-                                ? "border-amber-600 bg-amber-50"
-                                : "border-gray-200 hover:border-gray-300"
-                            }`}
+                            className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === local ? "border-amber-600 bg-amber-50" : "border-gray-200 hover:border-gray-300"}`}
                           >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-4">
@@ -3616,17 +3512,13 @@ function App() {
                                     {m.id === "card"
                                       ? "Pay with card"
                                       : m.id === "khalti"
-                                      ? "Pay via Khalti mobile wallet"
-                                      : ""}
+                                        ? "Pay via Khalti mobile wallet"
+                                        : ""}
                                   </p>
                                 </div>
                               </div>
                               <div
-                                className={`w-5 h-5 rounded-full border-2 ${
-                                  paymentMethod === local
-                                    ? "border-amber-600 bg-amber-600"
-                                    : "border-gray-300"
-                                }`}
+                                className={`w-5 h-5 rounded-full border-2 ${paymentMethod === local ? "border-amber-600 bg-amber-600" : "border-gray-300"}`}
                               ></div>
                             </div>
                           </div>
@@ -3791,9 +3683,7 @@ function App() {
     if (!lastOrder) {
       return (
         <div
-          className={`min-h-screen ${
-            darkMode ? "bg-gray-900" : "bg-stone-100"
-          } py-20`}
+          className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-stone-100"} py-20`}
         >
           <div className="max-w-md mx-auto p-6 rounded-lg shadow-lg bg-white text-center">
             <h2 className="text-2xl font-bold">Order placed</h2>
@@ -3813,9 +3703,7 @@ function App() {
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode ? "bg-gray-900" : "bg-stone-100"
-        } py-20`}
+        className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-stone-100"} py-20`}
       >
         <div className="max-w-lg mx-auto rounded-2xl overflow-hidden shadow-2xl">
           <div className="p-6 bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-700 text-white text-center">
@@ -3961,7 +3849,7 @@ function App() {
               state: "",
               zipCode: "",
               country: "",
-            }
+            },
           );
           setLocalItems(
             (data?.items || []).map((it) => ({
@@ -3972,10 +3860,10 @@ function App() {
               name: it.name,
               price: Number(it.price || 0),
               image: resolveAvatarSrc(
-                it.image || (it.product && it.product.image) || null
+                it.image || (it.product && it.product.image) || null,
               ),
               quantity: Number(it.quantity || 1),
-            }))
+            })),
           );
         } catch (err) {
           console.error("Failed to load order", err);
@@ -3997,9 +3885,7 @@ function App() {
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode ? "bg-gray-900" : "bg-stone-100"
-        } py-20`}
+        className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-stone-100"} py-20`}
       >
         <div className="max-w-3xl mx-auto p-6 rounded-2xl shadow-2xl bg-white">
           <div className="flex items-center justify-between mb-4">
@@ -4029,10 +3915,10 @@ function App() {
                             image: resolveAvatarSrc(
                               it.image ||
                                 (it.product && it.product.image) ||
-                                null
+                                null,
                             ),
                             quantity: Number(it.quantity || 1),
-                          }))
+                          })),
                         );
                         setLocalShipping(order.shippingAddress || {});
                       }}
@@ -4187,11 +4073,11 @@ function App() {
                                         ...p,
                                         quantity: Math.max(
                                           1,
-                                          Number(p.quantity || 1) - 1
+                                          Number(p.quantity || 1) - 1,
                                         ),
                                       }
-                                    : p
-                                )
+                                    : p,
+                                ),
                               )
                             }
                             className="px-2 py-1 rounded border"
@@ -4210,11 +4096,11 @@ function App() {
                                         ...p,
                                         quantity: Math.max(
                                           1,
-                                          Number(p.quantity || 1) + 1
+                                          Number(p.quantity || 1) + 1,
                                         ),
                                       }
-                                    : p
-                                )
+                                    : p,
+                                ),
                               )
                             }
                             className="px-2 py-1 rounded border"
@@ -4272,7 +4158,7 @@ function App() {
                               };
                               const updated = await updateOrder(
                                 order._id,
-                                payload
+                                payload,
                               );
                               setOrder(updated);
                               setLocalItems(
@@ -4286,10 +4172,10 @@ function App() {
                                   image: resolveAvatarSrc(
                                     it.image ||
                                       (it.product && it.product.image) ||
-                                      null
+                                      null,
                                   ),
                                   quantity: Number(it.quantity || 1),
-                                }))
+                                })),
                               );
                               setIsEditingOrder(false);
                             } catch (err) {
@@ -4314,10 +4200,10 @@ function App() {
                                 image: resolveAvatarSrc(
                                   it.image ||
                                     (it.product && it.product.image) ||
-                                    null
+                                    null,
                                 ),
                                 quantity: Number(it.quantity || 1),
-                              }))
+                              })),
                             );
                             setLocalShipping(order.shippingAddress || {});
                           }}
@@ -4344,11 +4230,11 @@ function App() {
     const [isEditing, setIsEditing] = useState(false);
     const [avatarPreview, setAvatarPreview] = useState(
       resolveAvatarSrc(user?.avatar || null) ||
-        generateAvatarDataUrl(user?.name || "")
+        generateAvatarDataUrl(user?.name || ""),
     );
     const [addresses, setAddresses] = useState(user?.addresses || []);
     const [primaryAddress, setPrimaryAddress] = useState(
-      user?.addresses?.[0] || { line1: "", city: "", state: "", zip: "" }
+      user?.addresses?.[0] || { line1: "", city: "", state: "", zip: "" },
     );
     const [orders, setOrders] = useState([]);
     const [loadingOrders, setLoadingOrders] = useState(true);
@@ -4374,11 +4260,11 @@ function App() {
       setPrimaryAddress(
         user.addresses && user.addresses[0]
           ? user.addresses[0]
-          : { line1: "", city: "", state: "", zip: "" }
+          : { line1: "", city: "", state: "", zip: "" },
       );
       setAvatarPreview(
         resolveAvatarSrc(user.avatar || null) ||
-          generateAvatarDataUrl(user.name || "")
+          generateAvatarDataUrl(user.name || ""),
       );
       setIsEditing(false);
     }, [user, token]);
@@ -4419,7 +4305,7 @@ function App() {
         setUser(normalized);
         setAvatarPreview(
           resolveAvatarSrc(normalized?.avatar || null) ||
-            generateAvatarDataUrl(normalized?.name || name || "")
+            generateAvatarDataUrl(normalized?.name || name || ""),
         );
         setIsEditing(false);
         alert("Profile updated");
@@ -4437,11 +4323,11 @@ function App() {
       setPrimaryAddress(
         user?.addresses && user.addresses[0]
           ? user.addresses[0]
-          : { line1: "", city: "", state: "", zip: "" }
+          : { line1: "", city: "", state: "", zip: "" },
       );
       setAvatarPreview(
         resolveAvatarSrc(user?.avatar || null) ||
-          generateAvatarDataUrl(user?.name || "")
+          generateAvatarDataUrl(user?.name || ""),
       );
       setIsEditing(false);
     };
@@ -4455,7 +4341,7 @@ function App() {
 
     const updateAddress = (idx, key, value) => {
       setAddresses((prev) =>
-        prev.map((a, i) => (i === idx ? { ...a, [key]: value } : a))
+        prev.map((a, i) => (i === idx ? { ...a, [key]: value } : a)),
       );
     };
 
@@ -4481,9 +4367,7 @@ function App() {
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode ? "bg-gray-900" : "bg-stone-100"
-        } py-20`}
+        className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-stone-100"} py-20`}
       >
         <div className="max-w-5xl mx-auto px-4">
           <style>{`
@@ -4522,9 +4406,7 @@ function App() {
                 <div className="mt-4 w-full text-center">
                   <div className="text-sm text-gray-500">Signed in as</div>
                   <div
-                    className={`font-semibold text-lg ${
-                      darkMode ? "text-white" : "text-gray-900"
-                    }`}
+                    className={`font-semibold text-lg ${darkMode ? "text-white" : "text-gray-900"}`}
                   >
                     {user?.email}
                   </div>
@@ -4572,11 +4454,7 @@ function App() {
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           disabled={!isEditing}
-                          className={`w-full p-3 rounded-lg border profile-input mt-1 ${
-                            !isEditing
-                              ? "bg-gray-50 text-gray-600"
-                              : "focus:border-amber-500"
-                          }`}
+                          className={`w-full p-3 rounded-lg border profile-input mt-1 ${!isEditing ? "bg-gray-50 text-gray-600" : "focus:border-amber-500"}`}
                         />
                         <div className="text-xs text-gray-400 mt-1">
                           We may use this number for delivery and notifications.
@@ -4617,11 +4495,7 @@ function App() {
                             }))
                           }
                           disabled={!isEditing}
-                          className={`col-span-3 p-2 rounded border ${
-                            !isEditing
-                              ? "bg-gray-50 text-gray-600"
-                              : "focus:border-amber-500"
-                          }`}
+                          className={`col-span-3 p-2 rounded border ${!isEditing ? "bg-gray-50 text-gray-600" : "focus:border-amber-500"}`}
                         />
                         <input
                           placeholder="City"
@@ -4633,11 +4507,7 @@ function App() {
                             }))
                           }
                           disabled={!isEditing}
-                          className={`col-span-1 p-2 rounded border ${
-                            !isEditing
-                              ? "bg-gray-50 text-gray-600"
-                              : "focus:border-amber-500"
-                          }`}
+                          className={`col-span-1 p-2 rounded border ${!isEditing ? "bg-gray-50 text-gray-600" : "focus:border-amber-500"}`}
                         />
                         <input
                           placeholder="State"
@@ -4649,11 +4519,7 @@ function App() {
                             }))
                           }
                           disabled={!isEditing}
-                          className={`col-span-1 p-2 rounded border ${
-                            !isEditing
-                              ? "bg-gray-50 text-gray-600"
-                              : "focus:border-amber-500"
-                          }`}
+                          className={`col-span-1 p-2 rounded border ${!isEditing ? "bg-gray-50 text-gray-600" : "focus:border-amber-500"}`}
                         />
                         <input
                           placeholder="ZIP"
@@ -4665,11 +4531,7 @@ function App() {
                             }))
                           }
                           disabled={!isEditing}
-                          className={`col-span-1 p-2 rounded border ${
-                            !isEditing
-                              ? "bg-gray-50 text-gray-600"
-                              : "focus:border-amber-500"
-                          }`}
+                          className={`col-span-1 p-2 rounded border ${!isEditing ? "bg-gray-50 text-gray-600" : "focus:border-amber-500"}`}
                         />
                       </div>
                     </div>
@@ -4686,11 +4548,7 @@ function App() {
                               updateAddress(idx + 1, "line1", e.target.value)
                             }
                             disabled={!isEditing}
-                            className={`col-span-4 p-2 rounded border ${
-                              !isEditing
-                                ? "bg-gray-50 text-gray-600"
-                                : "focus:border-amber-500"
-                            }`}
+                            className={`col-span-4 p-2 rounded border ${!isEditing ? "bg-gray-50 text-gray-600" : "focus:border-amber-500"}`}
                           />
                           <input
                             placeholder="City"
@@ -4699,11 +4557,7 @@ function App() {
                               updateAddress(idx + 1, "city", e.target.value)
                             }
                             disabled={!isEditing}
-                            className={`col-span-1 p-2 rounded border ${
-                              !isEditing
-                                ? "bg-gray-50 text-gray-600"
-                                : "focus:border-amber-500"
-                            }`}
+                            className={`col-span-1 p-2 rounded border ${!isEditing ? "bg-gray-50 text-gray-600" : "focus:border-amber-500"}`}
                           />
                           {isEditing && (
                             <button
@@ -4849,16 +4703,12 @@ function App() {
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode ? "bg-gray-900" : "bg-stone-100"
-        } py-20`}
+        className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-stone-100"} py-20`}
       >
         <div className="max-w-6xl mx-auto p-6">
           <div className="flex items-center justify-between mb-6">
             <h2
-              className={`text-3xl font-extrabold ${
-                darkMode ? "text-white" : "text-amber-800"
-              }`}
+              className={`text-3xl font-extrabold ${darkMode ? "text-white" : "text-amber-800"}`}
             >
               My Orders
             </h2>
@@ -4883,7 +4733,7 @@ function App() {
                     o.items[0] &&
                     (o.items[0].image ||
                       (o.items[0].product && o.items[0].product.image))) ||
-                    null
+                    null,
                 );
                 return (
                   <div
@@ -4924,11 +4774,7 @@ function App() {
                               रु{(o.total || 0).toLocaleString()}
                             </div>
                             <div
-                              className={`mt-1 inline-block px-3 py-1 rounded-full text-sm ${
-                                o.orderStatus === "pending"
-                                  ? "bg-yellow-100 text-amber-800"
-                                  : "bg-gray-100 text-gray-700"
-                              }`}
+                              className={`mt-1 inline-block px-3 py-1 rounded-full text-sm ${o.orderStatus === "pending" ? "bg-yellow-100 text-amber-800" : "bg-gray-100 text-gray-700"}`}
                             >
                               {o.orderStatus}
                             </div>
@@ -4937,9 +4783,7 @@ function App() {
 
                         <div className="mt-3 text-sm text-gray-600 line-clamp-2">
                           {o.items && o.items.length
-                            ? `${o.items.length} item${
-                                o.items.length > 1 ? "s" : ""
-                              } • ${o.items
+                            ? `${o.items.length} item${o.items.length > 1 ? "s" : ""} • ${o.items
                                 .map((it) => it.name)
                                 .slice(0, 2)
                                 .join(", ")}`
@@ -4995,23 +4839,15 @@ function App() {
       selectedCategory === "All"
         ? products
         : products.filter((p) =>
-            p.name.toLowerCase().includes(selectedCategory.toLowerCase())
+            p.name.toLowerCase().includes(selectedCategory.toLowerCase()),
           );
 
     return (
       <div
-        className={`min-h-screen ${
-          darkMode
-            ? "bg-gray-900"
-            : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"
-        }`}
+        className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"}`}
       >
         <div
-          className={`py-20 ${
-            darkMode
-              ? "bg-gray-900"
-              : "bg-gradient-to-b from-stone-100 to-stone-50"
-          }`}
+          className={`py-20 ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 to-stone-50"}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
@@ -5041,8 +4877,8 @@ function App() {
                     selectedCategory === category
                       ? "bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-700 text-white shadow-lg scale-105"
                       : darkMode
-                      ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
-                      : "bg-stone-100 text-gray-800 hover:bg-amber-100 border border-amber-200"
+                        ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                        : "bg-stone-100 text-gray-800 hover:bg-amber-100 border border-amber-200"
                   }`}
                 >
                   {category}
@@ -5154,11 +4990,7 @@ function App() {
 
   return (
     <div
-      className={`min-h-screen ${
-        darkMode
-          ? "bg-gray-900"
-          : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"
-      }`}
+      className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100"}`}
     >
       <Navbar />
       {currentPage === "home" && (
@@ -5185,9 +5017,7 @@ function App() {
       {currentPage === "register" && <RegisterPage />}
       {currentPage === "registerSuccess" && (
         <div
-          className={`min-h-screen ${
-            darkMode ? "bg-gray-900" : "bg-stone-100"
-          } py-20`}
+          className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-stone-100"} py-20`}
         >
           <div className="max-w-md mx-auto p-6 bg-white rounded shadow">
             <h2 className="text-2xl font-bold">Account created</h2>

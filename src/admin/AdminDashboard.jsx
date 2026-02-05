@@ -1933,7 +1933,7 @@ import {
   Settings,
 } from "lucide-react";
 
-const API_URL = "https://dwarika-ecommerce.onrender.com/api";
+const API_URL = "http://localhost:5000/api";
 
 function AdminDashboard() {
   const [activeTab, setActiveTab] = useState(() => {
@@ -2128,7 +2128,7 @@ function AdminDashboard() {
         try {
           localStorage.setItem(
             "shippingCharge",
-            JSON.stringify(shippingCharge)
+            JSON.stringify(shippingCharge),
           );
         } catch (e) {}
       } else {
@@ -2148,7 +2148,7 @@ function AdminDashboard() {
         const d = await res.json();
         // Filter out UPI/mobile-pay option from admin settings
         setPaymentMethods(
-          (d.paymentMethods || []).filter((m) => m.id !== "upi")
+          (d.paymentMethods || []).filter((m) => m.id !== "upi"),
         );
       }
     } catch (e) {
@@ -2245,18 +2245,18 @@ function AdminDashboard() {
         : { products: [] };
 
       const allOrders = (allOrdersData.orders || []).sort(
-        (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
+        (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0),
       );
       const allProducts = allProductsData.products || [];
 
       const pendingOrders = allOrders.filter(
-        (o) => o.orderStatus === "pending" || o.orderStatus === "processing"
+        (o) => o.orderStatus === "pending" || o.orderStatus === "processing",
       ).length;
       const completedOrders = allOrders.filter(
-        (o) => o.orderStatus === "delivered"
+        (o) => o.orderStatus === "delivered",
       ).length;
       const lowStockProducts = allProducts.filter(
-        (p) => p.stock < 10 && p.stock > 0
+        (p) => p.stock < 10 && p.stock > 0,
       ).length;
 
       const today = new Date();
@@ -2265,14 +2265,14 @@ function AdminDashboard() {
 
       const todayRevenue = allOrders
         .filter(
-          (o) => new Date(o.createdAt) >= today && o.paymentStatus === "paid"
+          (o) => new Date(o.createdAt) >= today && o.paymentStatus === "paid",
         )
         .reduce((sum, o) => sum + (o.total || 0), 0);
 
       const monthlyRevenue = allOrders
         .filter(
           (o) =>
-            new Date(o.createdAt) >= thisMonth && o.paymentStatus === "paid"
+            new Date(o.createdAt) >= thisMonth && o.paymentStatus === "paid",
         )
         .reduce((sum, o) => sum + (o.total || 0), 0);
 
@@ -2405,16 +2405,10 @@ function AdminDashboard() {
           (i) => `
           <tr>
             <td style="padding:8px;border:1px solid #ddd">${i.name || ""}</td>
-            <td style="padding:8px;border:1px solid #ddd;text-align:center">${
-              i.quantity
-            }</td>
-            <td style="padding:8px;border:1px solid #ddd;text-align:right">रु${(
-              i.price || 0
-            ).toLocaleString()}</td>
-            <td style="padding:8px;border:1px solid #ddd;text-align:right">रु${(
-              (i.price || 0) * (i.quantity || 1)
-            ).toLocaleString()}</td>
-          </tr>`
+            <td style="padding:8px;border:1px solid #ddd;text-align:center">${i.quantity}</td>
+            <td style="padding:8px;border:1px solid #ddd;text-align:right">रु${(i.price || 0).toLocaleString()}</td>
+            <td style="padding:8px;border:1px solid #ddd;text-align:right">रु${((i.price || 0) * (i.quantity || 1)).toLocaleString()}</td>
+          </tr>`,
         )
         .join("");
 
@@ -2463,21 +2457,16 @@ function AdminDashboard() {
               <div style="margin-top:18px;text-align:right">
                 <div>Subtotal: रु${(order.subtotal || 0).toLocaleString()}</div>
                 <div>Shipping: रु${(order.shipping || 0).toLocaleString()}</div>
-                <div style="font-weight:700;margin-top:6px">Total: रु${(
-                  order.total || 0
-                ).toLocaleString()}</div>
+                <div style="font-weight:700;margin-top:6px">Total: रु${(order.total || 0).toLocaleString()}</div>
               </div>
 
               <h4 style="margin-top:22px">Shipping Address</h4>
               <div>
-  ${order.shippingAddress?.name || ""}<br/>
-  ${order.shippingAddress?.phone || ""}<br/>
-  ${order.shippingAddress?.street || ""}<br/>
-  ${order.shippingAddress?.city || ""} ${
-        order.shippingAddress?.zipCode || ""
-      }<br/>
-  ${order.shippingAddress?.state || ""}, ${order.shippingAddress?.country || ""}
-</div>
+                ${order.shippingAddress?.name || ""}<br/>
+                ${order.shippingAddress?.street || ""}<br/>
+                ${order.shippingAddress?.city || ""} ${order.shippingAddress?.zipCode || ""}<br/>
+                ${order.shippingAddress?.state || ""}, ${order.shippingAddress?.country || ""}
+              </div>
 
               <script>
                 window.onload = function(){ setTimeout(function(){ window.print(); }, 250); };
@@ -2544,9 +2533,7 @@ function AdminDashboard() {
           setUser(data.user);
         } else {
           alert(
-            `Login successful but user is not an admin. Role: ${
-              data.user?.role || "unknown"
-            }`
+            `Login successful but user is not an admin. Role: ${data.user?.role || "unknown"}`,
           );
         }
       } else {
@@ -2557,7 +2544,7 @@ function AdminDashboard() {
     } catch (error) {
       console.error("Login error:", error);
       alert(
-        `Login failed: ${error.message}. Please check if the backend server is running on ${API_URL}`
+        `Login failed: ${error.message}. Please check if the backend server is running on ${API_URL}`,
       );
     }
   };
@@ -3204,7 +3191,7 @@ function AdminDashboard() {
                       Object.entries(orderStatusData).map(([status, count]) => {
                         const total = Object.values(orderStatusData).reduce(
                           (a, b) => a + b,
-                          0
+                          0,
                         );
                         const percentage =
                           total > 0 ? (count / total) * 100 : 0;
@@ -3230,9 +3217,7 @@ function AdminDashboard() {
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-2">
                               <div
-                                className={`${
-                                  colors[status] || "bg-gray-500"
-                                } h-2 rounded-full transition-all duration-500`}
+                                className={`${colors[status] || "bg-gray-500"} h-2 rounded-full transition-all duration-500`}
                                 style={{ width: `${percentage}%` }}
                               ></div>
                             </div>
@@ -3371,7 +3356,7 @@ function AdminDashboard() {
                                 <span className="text-sm text-gray-600">
                                   {order.createdAt
                                     ? new Date(
-                                        order.createdAt
+                                        order.createdAt,
                                       ).toLocaleDateString()
                                     : "N/A"}
                                 </span>
@@ -3782,8 +3767,8 @@ function AdminDashboard() {
                               product.status === "active"
                                 ? "bg-green-100 text-green-800"
                                 : product.status === "inactive"
-                                ? "bg-gray-100 text-gray-800"
-                                : "bg-red-100 text-red-800"
+                                  ? "bg-gray-100 text-gray-800"
+                                  : "bg-red-100 text-red-800"
                             }`}
                           >
                             {product.status}
@@ -4041,11 +4026,7 @@ function AdminDashboard() {
                         <td className="px-4 py-3">{u.phone || "-"}</td>
                         <td className="px-4 py-3">
                           <span
-                            className={`px-2 py-1 rounded text-xs ${
-                              u.role === "admin"
-                                ? "bg-purple-100 text-purple-800"
-                                : "bg-blue-100 text-blue-800"
-                            }`}
+                            className={`px-2 py-1 rounded text-xs ${u.role === "admin" ? "bg-purple-100 text-purple-800" : "bg-blue-100 text-blue-800"}`}
                           >
                             {u.role}
                           </span>
@@ -4056,8 +4037,8 @@ function AdminDashboard() {
                               u.status === "active"
                                 ? "bg-green-100 text-green-800"
                                 : u.status === "inactive"
-                                ? "bg-gray-100 text-gray-800"
-                                : "bg-red-100 text-red-800"
+                                  ? "bg-gray-100 text-gray-800"
+                                  : "bg-red-100 text-red-800"
                             }`}
                           >
                             {u.status}
@@ -4159,8 +4140,8 @@ function AdminDashboard() {
                               order.paymentStatus === "paid"
                                 ? "bg-green-100 text-green-800"
                                 : order.paymentStatus === "pending"
-                                ? "bg-yellow-100 text-yellow-800"
-                                : "bg-red-100 text-red-800"
+                                  ? "bg-yellow-100 text-yellow-800"
+                                  : "bg-red-100 text-red-800"
                             }`}
                           >
                             {order.paymentStatus}
@@ -4492,11 +4473,7 @@ function AdminDashboard() {
                         </div>
                         <div className="flex justify-between items-center">
                           <span
-                            className={`px-2 py-1 rounded text-xs ${
-                              banner.active
-                                ? "bg-green-100 text-green-800"
-                                : "bg-gray-100 text-gray-800"
-                            }`}
+                            className={`px-2 py-1 rounded text-xs ${banner.active ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}`}
                           >
                             {banner.active ? "Active" : "Inactive"}
                           </span>
@@ -4602,10 +4579,10 @@ function AdminDashboard() {
                             {m.id === "cash_on_delivery"
                               ? "COD"
                               : m.id === "card"
-                              ? "CARD"
-                              : m.id === "khalti"
-                              ? "KHL"
-                              : m.id.toUpperCase()}
+                                ? "CARD"
+                                : m.id === "khalti"
+                                  ? "KHL"
+                                  : m.id.toUpperCase()}
                           </div>
                           <div>
                             <div className="font-medium text-gray-800">
@@ -4621,15 +4598,11 @@ function AdminDashboard() {
                               next[idx] = { ...m, enabled: !m.enabled };
                               setPaymentMethods(next);
                             }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                              m.enabled ? "bg-amber-600" : "bg-gray-200"
-                            }`}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${m.enabled ? "bg-amber-600" : "bg-gray-200"}`}
                             aria-pressed={m.enabled}
                           >
                             <span
-                              className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
-                                m.enabled ? "translate-x-5" : "translate-x-1"
-                              }`}
+                              className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${m.enabled ? "translate-x-5" : "translate-x-1"}`}
                             />
                           </button>
                         </div>

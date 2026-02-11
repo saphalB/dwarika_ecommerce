@@ -1433,7 +1433,7 @@ function App() {
                   <div
                     className={`text-3xl font-bold ${darkMode ? "text-white" : "text-gray-900"}`}
                   >
-                    35+
+                    10+
                   </div>
                   <div
                     className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}
@@ -1985,7 +1985,7 @@ function App() {
               <h3 className="text-3xl font-bold text-yellow-400">Dwarika</h3>
             </div>
             <p className={darkMode ? "text-gray-300" : "text-white/90"}>
-              Your trusted partner for exquisite gold jewelry since 1990.
+              Your trusted partner for exquisite gold jewelry since 2010.
             </p>
           </div>
           <div>
@@ -2106,19 +2106,19 @@ function App() {
               <li className="flex items-center space-x-2">
                 <Phone className="w-5 h-5 text-yellow-400" />
                 <span className={darkMode ? "text-gray-300" : "text-white/90"}>
-                  +977 1234567890
+                  +977 9808132239
                 </span>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-5 h-5 text-yellow-400" />
                 <span className={darkMode ? "text-gray-300" : "text-white/90"}>
-                  info@dwarika.com
+                  dwarikajeweller@gmail.com
                 </span>
               </li>
               <li className="flex items-center space-x-2">
                 <MapPin className="w-5 h-5 text-yellow-400" />
                 <span className={darkMode ? "text-gray-300" : "text-white/90"}>
-                  Patan, Nepal
+                  Sinamangal, Kathmandu, Nepal
                 </span>
               </li>
             </ul>
@@ -2164,29 +2164,38 @@ function App() {
                 darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              Established in 1990, Dwarika has been serving the community with
-              authentic and exquisite gold jewelry for over three decades. Our
-              commitment to quality and craftsmanship has made us one of the
-              most trusted names in the industry.
+              Dwarika Jewellers was born from a deep respect for family legacy,
+              craftsmanship, and trust passed down from one generation to the
+              next. Founded in honor of our father’s name and values, Dwarika
+              Jewellers carries forward a tradition rooted in honesty,
+              precision, and timeless beauty. What began as a vision inspired by
+              our father’s dedication to quality and integrity has grown into a
+              brand that celebrates both heritage and modern elegance.
             </p>
             <p
               className={`text-lg mb-4 ${
                 darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              Every piece of jewelry at Dwarika is crafted with precision and
-              passion by our skilled artisans. We blend traditional
-              craftsmanship with modern designs to create timeless pieces that
-              celebrate your special moments.
+              With a strong foundation in fine jewellery and diamonds, the
+              journey of Dwarika Jewellers has been shaped by passion, hard
+              work, and an unwavering commitment to excellence. Every piece we
+              create reflects not only artistry, but also the values taught to
+              us—trust, transparency, and respect for our customers.
             </p>
             <p
               className={`text-lg ${
                 darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              From bridal collections to everyday elegance, we offer a wide
-              range of jewelry that caters to every taste and occasion. Visit us
-              and experience the Dwarika difference.
+              Today, the business is led by Laxmi Shrestha, a dedicated diamond
+              expert with a sharp eye for quality, authenticity, and timeless
+              design. With years of hands-on experience and deep knowledge of
+              diamonds and fine jewelry, Laxmi Shrestha ensures that every piece
+              meets the highest standards. Supporting this journey is Shree
+              Rajan, whose guidance, management, and constant support strengthen
+              our vision and daily operations. Together, we blend tradition with
+              modern expertise to serve our customers with excellence.
             </p>
           </div>
         </div>
@@ -2227,10 +2236,10 @@ function App() {
                     Phone
                   </h3>
                   <p className={darkMode ? "text-gray-300" : "text-gray-600"}>
-                    +977 1234567890
+                    +977 9808132239
                   </p>
                   <p className={darkMode ? "text-gray-300" : "text-gray-600"}>
-                    +977 0987654321
+                    +977 9808132239
                   </p>
                 </div>
               </div>
@@ -2247,10 +2256,7 @@ function App() {
                     Email
                   </h3>
                   <p className={darkMode ? "text-gray-300" : "text-gray-600"}>
-                    info@dwarika.com
-                  </p>
-                  <p className={darkMode ? "text-gray-300" : "text-gray-600"}>
-                    support@dwarika.com
+                    dwarikajeweller@gmail.com
                   </p>
                 </div>
               </div>
@@ -2267,7 +2273,7 @@ function App() {
                     Address
                   </h3>
                   <p className={darkMode ? "text-gray-300" : "text-gray-600"}>
-                    Main Street, Patan
+                    Sinamangal, Kathmandu
                   </p>
                   <p className={darkMode ? "text-gray-300" : "text-gray-600"}>
                     Bagmati Province, Nepal

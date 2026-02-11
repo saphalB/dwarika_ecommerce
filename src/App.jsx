@@ -886,6 +886,7 @@ function App() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
+            {/*logo*/}
             <div className="flex items-center space-x-4">
               <img
                 src="/logo.png"
@@ -893,7 +894,7 @@ function App() {
                 className="w-20 h-20 object-contain"
               />
               <span
-                className={`text-3xl font-bold bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-700 bg-clip-text text-transparent`}
+                className={`text-3xl font-bold bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-700 bg-clip-text text-transparent hidden sm:block`}
               >
                 Dwarika
               </span>
@@ -955,10 +956,10 @@ function App() {
                 Contact
               </button>
             </div>
-
-            <div className="flex items-center space-x-4">
+            {/* right side icons*/}
+            <div className="flex items-center space-x-2 md:space-x-4">
               {/* Search bar input and commit button */}
-              <div className="relative">
+              <div className="relative hidden md:block">
                 <input
                   type="text"
                   placeholder="Search products..."
@@ -1101,6 +1102,45 @@ function App() {
           {/* Mobile Menu */}
           {mobileMenuOpen && (
             <div className="md:hidden pb-4">
+              {/* Mobile Search Bar */}
+              <div className="mb-4 relative">
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={localTempQuery}
+                  onChange={(e) => setLocalTempQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      localCommitSearch();
+                      setMobileMenuOpen(false);
+                    }
+                  }}
+                  className={`w-full pl-10 pr-12 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-600 ${
+                    darkMode
+                      ? "bg-gray-800 text-white placeholder-gray-400"
+                      : "bg-stone-100 text-gray-900 placeholder-stone-500"
+                  }`}
+                />
+                <Search className="absolute left-3 top-2.5 w-5 h-5 text-gray-400 pointer-events-none" />
+                <button
+                  type="button"
+                  onClick={() => {
+                    localCommitSearch();
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`absolute right-3 top-2.5 rounded-full transition-all duration-200 ${
+                    localTempQuery.trim()
+                      ? "bg-amber-600 text-white"
+                      : darkMode
+                        ? "bg-gray-700 text-gray-400"
+                        : "bg-stone-300 text-stone-600"
+                  }`}
+                  aria-label="Search"
+                >
+                  <Search className="w-6 h-6" />
+                </button>
+              </div>
+
               <div className="flex flex-col space-y-3">
                 <button
                   type="button"

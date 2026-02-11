@@ -866,6 +866,7 @@ function App() {
   const Navbar = () => {
     // Local search state inside Navbar to control input before committing
     const [localTempQuery, setLocalTempQuery] = useState("");
+    const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
     const localCommitSearch = () => {
       setSearchQuery(localTempQuery);
@@ -874,6 +875,7 @@ function App() {
       } else {
         setCurrentPage("home");
       }
+      setMobileSearchOpen(false);
     };
 
     return (
@@ -886,19 +888,18 @@ function App() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/*logo*/}
-            <div className="flex items-center space-x-4">
+            {/* Logo - Clickable */}
+            <button
+              type="button"
+              onClick={() => setCurrentPage("home")}
+              className="flex items-center focus:outline-none flex-shrink-0"
+            >
               <img
                 src="/logo.png"
                 alt="Dwarika Logo"
-                className="w-20 h-20 object-contain"
+                className="w-16 h-16 md:w-20 md:h-20 object-contain cursor-pointer hover:opacity-80 transition-opacity"
               />
-              <span
-                className={`text-3xl font-bold bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-700 bg-clip-text text-transparent hidden sm:block`}
-              >
-                Dwarika
-              </span>
-            </div>
+            </button>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
@@ -915,7 +916,6 @@ function App() {
               >
                 Home
               </button>
-              {/* Admin link removed from header */}
               <button
                 type="button"
                 onClick={() => setCurrentPage("products")}
@@ -956,9 +956,10 @@ function App() {
                 Contact
               </button>
             </div>
-            {/* right side icons*/}
+
+            {/* Right side - Search, Cart, Auth, Mobile Menu */}
             <div className="flex items-center space-x-2 md:space-x-4">
-              {/* Search bar input and commit button */}
+              {/* Desktop Search bar */}
               <div className="relative hidden md:block">
                 <input
                   type="text"
@@ -970,7 +971,7 @@ function App() {
                       localCommitSearch();
                     }
                   }}
-                  className={`pl-10 pr-12 py-2 rounded-full w-48 lg:w-64 focus:outline-none focus:ring-2 focus:ring-amber-600 transition-all duration-200 ${
+                  className={`pl-10 pr-10 py-2 rounded-full w-48 lg:w-64 focus:outline-none focus:ring-2 focus:ring-amber-600 transition-all duration-200 ${
                     darkMode
                       ? "bg-gray-800 text-white placeholder-gray-400"
                       : "bg-stone-100 text-gray-900 placeholder-stone-500"
@@ -980,7 +981,7 @@ function App() {
                 <button
                   type="button"
                   onClick={localCommitSearch}
-                  className={`absolute right-3 top-2.5 rounded-full transition-all duration-200 ${
+                  className={`absolute right-2 top-1.5 p-1 rounded-full transition-all duration-200 ${
                     localTempQuery.trim()
                       ? "bg-amber-600 text-white hover:bg-amber-700 shadow-md hover:shadow-lg"
                       : darkMode
@@ -989,15 +990,26 @@ function App() {
                   }`}
                   aria-label="Search"
                 >
-                  <Search className="w-6 h-6" />
+                  <Search className="w-5 h-5" />
                 </button>
               </div>
+
+              {/* Mobile Search Icon */}
+              <button
+                type="button"
+                onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
+                className="md:hidden p-2 rounded-full hover:bg-amber-100 dark:hover:bg-gray-700 transition-colors flex-shrink-0"
+              >
+                <Search
+                  className={`w-6 h-6 ${darkMode ? "text-white" : "text-gray-700"}`}
+                />
+              </button>
 
               {/* Cart Icon */}
               <button
                 type="button"
                 onClick={() => setCurrentPage("cart")}
-                className="relative p-2 rounded-full hover:bg-amber-100 dark:hover:bg-gray-700 transition-colors"
+                className="relative p-2 rounded-full hover:bg-amber-100 dark:hover:bg-gray-700 transition-colors flex-shrink-0"
               >
                 <ShoppingCart
                   className={`w-6 h-6 ${darkMode ? "text-white" : "text-gray-700"}`}
@@ -1009,23 +1021,21 @@ function App() {
                 )}
               </button>
 
-              {/* Dark mode removed — always light theme */}
-
-              {/* Auth Buttons */}
+              {/* Auth Buttons - Now visible on mobile */}
               {user ? (
-                <div ref={userMenuRef} className="hidden md:block relative">
+                <div ref={userMenuRef} className="relative flex-shrink-0">
                   <button
                     type="button"
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                    className="flex items-center gap-2 px-3 py-2 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-700"
+                    className="flex items-center gap-1 md:gap-2 px-2 md:px-3 py-2 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-700"
                   >
                     <span
-                      className={`font-medium ${darkMode ? "text-white" : "text-amber-700"}`}
+                      className={`font-medium text-sm md:text-base ${darkMode ? "text-white" : "text-amber-700"}`}
                     >
                       {user.name ? user.name.split(" ")[0] : "User"}
                     </span>
                     <ChevronDown
-                      className={darkMode ? "text-white" : "text-amber-700"}
+                      className={`w-4 h-4 ${darkMode ? "text-white" : "text-amber-700"}`}
                     />
                   </button>
 
@@ -1073,22 +1083,22 @@ function App() {
                   )}
                 </div>
               ) : (
-                <div className="hidden md:flex items-center">
+                <div className="flex items-center flex-shrink-0">
                   <button
                     type="button"
                     onClick={() => setCurrentPage("login")}
-                    className="px-3 py-2 rounded-full bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-700 text-white shadow-md"
+                    className="px-3 py-2 text-sm md:text-base rounded-full bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-700 text-white shadow-md"
                   >
                     Login
                   </button>
                 </div>
               )}
 
-              {/* Mobile Menu Button */}
+              {/* Mobile Menu Button - Only for navigation menu */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2"
+                className="md:hidden p-2 flex-shrink-0"
               >
                 {mobileMenuOpen ? (
                   <X className={darkMode ? "text-white" : "text-gray-900"} />
@@ -1099,11 +1109,10 @@ function App() {
             </div>
           </div>
 
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <div className="md:hidden pb-4">
-              {/* Mobile Search Bar */}
-              <div className="mb-4 relative">
+          {/* Mobile Search Bar - Expands when search icon is clicked */}
+          {mobileSearchOpen && (
+            <div className="md:hidden pb-4 border-t border-amber-200 mt-2 pt-4">
+              <div className="relative">
                 <input
                   type="text"
                   placeholder="Search products..."
@@ -1112,35 +1121,48 @@ function App() {
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       localCommitSearch();
-                      setMobileMenuOpen(false);
                     }
                   }}
-                  className={`w-full pl-10 pr-12 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-600 ${
+                  autoFocus
+                  className={`w-full pl-10 pr-20 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-600 transition-all duration-200 ${
                     darkMode
                       ? "bg-gray-800 text-white placeholder-gray-400"
                       : "bg-stone-100 text-gray-900 placeholder-stone-500"
                   }`}
                 />
-                <Search className="absolute left-3 top-2.5 w-5 h-5 text-gray-400 pointer-events-none" />
-                <button
-                  type="button"
-                  onClick={() => {
-                    localCommitSearch();
-                    setMobileMenuOpen(false);
-                  }}
-                  className={`absolute right-3 top-2.5 rounded-full transition-all duration-200 ${
-                    localTempQuery.trim()
-                      ? "bg-amber-600 text-white"
-                      : darkMode
-                        ? "bg-gray-700 text-gray-400"
-                        : "bg-stone-300 text-stone-600"
-                  }`}
-                  aria-label="Search"
-                >
-                  <Search className="w-6 h-6" />
-                </button>
+                <Search className="absolute left-3 top-3.5 w-5 h-5 text-gray-400 pointer-events-none" />
+                <div className="absolute right-2 top-2 flex gap-1">
+                  <button
+                    type="button"
+                    onClick={localCommitSearch}
+                    className="p-1.5 rounded-full bg-amber-600 text-white hover:bg-amber-700 shadow-md"
+                    aria-label="Search"
+                  >
+                    <Search className="w-5 h-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileSearchOpen(false);
+                      setLocalTempQuery("");
+                    }}
+                    className={`p-1.5 rounded-full transition-colors ${
+                      darkMode
+                        ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                        : "bg-stone-300 text-stone-600 hover:bg-stone-400"
+                    }`}
+                    aria-label="Close search"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
+            </div>
+          )}
 
+          {/* Mobile Menu - Only navigation links */}
+          {mobileMenuOpen && (
+            <div className="md:hidden pb-4 border-t border-amber-200 mt-2 pt-4">
               <div className="flex flex-col space-y-3">
                 <button
                   type="button"
@@ -1148,13 +1170,13 @@ function App() {
                     setCurrentPage("home");
                     setMobileMenuOpen(false);
                   }}
-                  className={`text-left ${
+                  className={`text-left px-2 py-2 rounded ${
                     currentPage === "home"
-                      ? "text-amber-600"
+                      ? "text-amber-600 bg-amber-50"
                       : darkMode
                         ? "text-gray-300"
                         : "text-gray-700"
-                  } hover:text-amber-600`}
+                  } hover:text-amber-600 hover:bg-amber-50`}
                 >
                   Home
                 </button>
@@ -1164,13 +1186,13 @@ function App() {
                     setCurrentPage("products");
                     setMobileMenuOpen(false);
                   }}
-                  className={`text-left ${
+                  className={`text-left px-2 py-2 rounded ${
                     currentPage === "products"
-                      ? "text-amber-600"
+                      ? "text-amber-600 bg-amber-50"
                       : darkMode
                         ? "text-gray-300"
                         : "text-gray-700"
-                  } hover:text-amber-600`}
+                  } hover:text-amber-600 hover:bg-amber-50`}
                 >
                   Products
                 </button>
@@ -1180,13 +1202,13 @@ function App() {
                     setCurrentPage("about");
                     setMobileMenuOpen(false);
                   }}
-                  className={`text-left ${
+                  className={`text-left px-2 py-2 rounded ${
                     currentPage === "about"
-                      ? "text-amber-600"
+                      ? "text-amber-600 bg-amber-50"
                       : darkMode
                         ? "text-gray-300"
                         : "text-gray-700"
-                  } hover:text-amber-600`}
+                  } hover:text-amber-600 hover:bg-amber-50`}
                 >
                   About
                 </button>
@@ -1196,66 +1218,16 @@ function App() {
                     setCurrentPage("contact");
                     setMobileMenuOpen(false);
                   }}
-                  className={`text-left ${
+                  className={`text-left px-2 py-2 rounded ${
                     currentPage === "contact"
-                      ? "text-amber-600"
+                      ? "text-amber-600 bg-amber-50"
                       : darkMode
                         ? "text-gray-300"
                         : "text-gray-700"
-                  } hover:text-amber-600`}
+                  } hover:text-amber-600 hover:bg-amber-50`}
                 >
                   Contact
                 </button>
-                {/* Mobile auth action */}
-                {user ? (
-                  <>
-                    <div className="pt-4 px-3 border-t">
-                      <div className="font-semibold text-amber-700">
-                        {user.name ? user.name.split(" ")[0] : "User"}
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setCurrentPage("profile");
-                        setMobileMenuOpen(false);
-                      }}
-                      className="text-left px-4 py-2 text-amber-700"
-                    >
-                      Profile
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setCurrentPage("myOrders");
-                        setMobileMenuOpen(false);
-                      }}
-                      className="text-left px-4 py-2 text-amber-700"
-                    >
-                      My Orders
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        handleLogout();
-                        setMobileMenuOpen(false);
-                      }}
-                      className="text-left px-4 py-2 text-red-600"
-                    >
-                      Logout
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    onClick={() => {
-                      setCurrentPage("login");
-                      setMobileMenuOpen(false);
-                    }}
-                    className="text-left text-amber-600 font-medium"
-                  >
-                    Login
-                  </button>
-                )}
               </div>
             </div>
           )}
@@ -1783,7 +1755,7 @@ function App() {
     const stats = [
       {
         icon: <Award className="w-6 h-6" />,
-        value: "35+",
+        value: "10+",
         label: "Years of Excellence",
         color: "from-yellow-400 to-yellow-600",
       },
@@ -2019,9 +1991,11 @@ function App() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-4 mb-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-amber-600 via-yellow-500 to-amber-700 rounded-full flex items-center justify-center shadow-lg">
-                <span className="text-yellow-400 text-3xl font-bold">D</span>
-              </div>
+              <img
+                src="/logo.png"
+                alt="Dwarika-Logo"
+                className="w-16 h-16 object-contain"
+              />
               <h3 className="text-3xl font-bold text-yellow-400">Dwarika</h3>
             </div>
             <p className={darkMode ? "text-gray-300" : "text-white/90"}>
